@@ -5,10 +5,12 @@ mod gamedata;
 mod map;
 mod camera;
 mod layers;
+mod input;
 
 use player::player::PlayerPlugin;
 use camera::CameraPlugin;
 use map::grid::GridPlugin;
+use input::InputPlugin;
 
 fn main() {
 
@@ -25,6 +27,7 @@ fn main() {
         .add_plugin(GridPlugin)
         .add_plugin(PlayerPlugin)
         .add_plugin(CameraPlugin)
+        .add_plugin(InputPlugin)
         .run();
 }
 
