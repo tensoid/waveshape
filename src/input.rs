@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::player::player_bundle::*;
+use crate::player::player_bundles::*;
 
 
 pub struct InputPlugin;
@@ -13,33 +13,44 @@ impl Plugin for InputPlugin {
 
 
 fn move_player (
-    keyboard_input: Res<Input<KeyCode>>,
     windows: Res<Windows>,
-    mut query: Query<(&Acceleration, &Deceleration, &RotationSpeed, &MaxVelocity, &mut Velocity, &mut Transform), With<Player>>,
+    mouse: Res<Input<MouseButton>>,
+    mut player_query: Query<(&Acceleration, &Deceleration, &MaxVelocity, &mut Velocity, &mut Transform), With<Player>>,
+    mut booster_query: Query<&mut Visibility, With<Booster>>
 ) {
     let (
         player_acceleration, 
         player_deceleration, 
-        player_rotation_speed, 
         player_max_velocity, 
         mut player_velocity, 
         mut player_transform
-    ) = query.single_mut();
+    ) = player_query.single_mut();
+
+    let mut booster_visibility = booster_query.single_mut();
 
     //TODO: change pivot point
     let window = windows.get_primary().unwrap();
-    if let Some(cursor_position) = window.cursor_position() {
-        let player_rotation_z: f32 = player_transform.translation.truncate().angle_between(cursor_position);
-        println!("{}", player_transform.translation);
-        //println!("{}", cursor_position);
+    if let Some(mut cursor_position) = window.cursor_position() {
+
+        let window_width: f32 = window.width();
+        let window_height: f32 = window.height();
+
+        // Offset to center of screen aka player
+        cursor_position.x -= window_width / 2.0;
+        cursor_position.y -= window_height / 2.0;
+
+        // Set the players rotation to the direction of the mouse cursor
+        let player_rotation_z: f32 = Vec2::new(0.0, 1.0).angle_between(cursor_position);
         player_transform.rotation = Quat::from_rotation_z(player_rotation_z);
     }
 
-    if keyboard_input.pressed(KeyCode::W){
+    if mouse.pressed(MouseButton::Left){
         let player_direction = (player_transform.rotation * Vec3::Y).truncate();
         player_velocity.0 += player_direction * player_acceleration.0;
+        booster_visibility.is_visible = true;
     }
     else {
+        booster_visibility.is_visible = false;
         player_velocity.0 *= player_deceleration.0;
     } 
     

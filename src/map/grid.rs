@@ -9,7 +9,7 @@ pub struct GridPlugin;
 
 //const GRID_SQUARE_LENGTH: f32 = 73.0;
 const GRID_SQUARE_LENGTH: f32 = 100.0;
-const GRID_SCALE: f32 = 1.0;
+const GRID_SCALE: f32 = 2.0;
 
 impl Plugin for GridPlugin {
     fn build(&self, app: &mut App) {

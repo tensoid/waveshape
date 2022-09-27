@@ -6,6 +6,7 @@ mod map;
 mod camera;
 mod layers;
 mod input;
+mod utils;
 
 use player::player::PlayerPlugin;
 use camera::CameraPlugin;

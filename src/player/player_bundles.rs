@@ -43,3 +43,16 @@ pub struct PlayerBundle {
     #[bundle]
     pub sprite_bundle: SpriteBundle
 }
+
+
+
+#[derive(Component)]
+pub struct Booster;
+
+#[derive(Bundle)]
+pub struct BoosterBundle {
+    pub booster: Booster,
+
+    #[bundle]
+    pub sprite_bundle: SpriteBundle
+}
