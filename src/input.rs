@@ -2,6 +2,7 @@ use bevy::prelude::*;
 
 use crate::player::player_bundles::*;
 
+const MIN_SPEED_BEFORE_STOP: f32 = 0.1;
 
 pub struct InputPlugin;
 
@@ -52,6 +53,9 @@ fn move_player (
     else {
         booster_visibility.is_visible = false;
         player_velocity.0 *= player_deceleration.0;
+        if player_velocity.0.length() < MIN_SPEED_BEFORE_STOP {
+            player_velocity.0 = Vec2::ZERO;
+        }
     } 
     
     player_transform.translation += player_velocity.0.clamp_length_max(player_max_velocity.0).extend(0.0);

@@ -21,7 +21,7 @@ impl Class {
                     },
                     level: Level(0.0),
                     acceleration: Acceleration(0.2),
-                    deceleration: Deceleration(0.95),
+                    deceleration: Deceleration(0.97),
                     velocity: Velocity(Vec2::new(0.0, 0.0)),
                     rotation_speed: RotationSpeed(0.1),
                     max_velocity: MaxVelocity(8.0),
@@ -52,7 +52,7 @@ impl Class {
                         texture: booster_texture,
                         sprite: Sprite {
                             flip_y: true, 
-                            color: Color::rgb(1.0, 0.05, 0.0), 
+                            //color: Color::rgb(1.0, 0.05, 0.0), 
                             ..default()
                         },
                         transform: Transform {

@@ -24,7 +24,7 @@ fn spawn_grid(mut commands: Commands, asset_server: Res<AssetServer>) {
         .spawn_bundle(SpriteBundle {
             texture: grid_texture,
             sprite: Sprite {
-                color: Color::rgb(87.0 / 255.0, 2.0 / 255.0, 150.0 / 255.0),
+                color: Color::rgba(87.0 / 255.0, 2.0 / 255.0, 150.0 / 255.0, 0.1),
                 ..default()
             },
             transform: Transform {
