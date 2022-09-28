@@ -23,7 +23,6 @@ impl Class {
                     acceleration: Acceleration(0.2),
                     deceleration: Deceleration(0.97),
                     velocity: Velocity(Vec2::new(0.0, 0.0)),
-                    rotation_speed: RotationSpeed(0.1),
                     max_velocity: MaxVelocity(8.0),
                     sprite_bundle: SpriteBundle {
                         texture: player_texture,

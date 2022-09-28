@@ -25,8 +25,6 @@ pub struct Velocity(pub Vec2);
 #[derive(Component)]
 pub struct MaxVelocity(pub f32);
 
-#[derive(Component)]
-pub struct RotationSpeed(pub f32);
 
 
 #[derive(Bundle)]
@@ -38,7 +36,6 @@ pub struct PlayerBundle {
     pub deceleration: Deceleration,
     pub velocity: Velocity,
     pub max_velocity: MaxVelocity,
-    pub rotation_speed: RotationSpeed,
 
     #[bundle]
     pub sprite_bundle: SpriteBundle
