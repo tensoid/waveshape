@@ -6,6 +6,8 @@ use crate::player::player_bundles::Player;
 const BOOSTER_ZOOM: f32 = 1.1;
 const BOOSTER_ZOOM_SMOOTH: f32 = 0.1;
 
+const CAMERA_FOLLOW_SMOOTH: f32 = 0.2;
+
 
 pub struct CameraPlugin;
 
@@ -24,13 +26,14 @@ fn spawn_camera(mut commands: Commands){
 
 fn move_camera(
     mut camera_query: Query<&mut Transform, (With<Camera>, Without<Player>)>,
-    mut player_query: Query<&mut Transform, (With<Player>, Without<Camera>)>,
+    player_query: Query<&mut Transform, (With<Player>, Without<Camera>)>,
 ){
-    let mut player_transform = player_query.single_mut();
+    let player_transform = player_query.single();
     let mut camera_transform = camera_query.single_mut();
 
-    camera_transform.translation.x = player_transform.translation.x;
-    camera_transform.translation.y = player_transform.translation.y;
+    camera_transform.translation.x = lerp_f32(camera_transform.translation.x, player_transform.translation.x, CAMERA_FOLLOW_SMOOTH);
+    camera_transform.translation.y = lerp_f32(camera_transform.translation.y, player_transform.translation.y, CAMERA_FOLLOW_SMOOTH);
+
 }
 
 fn camera_effects(

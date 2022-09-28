@@ -57,6 +57,9 @@ fn move_player (
             player_velocity.0 = Vec2::ZERO;
         }
     } 
+
+    // Clamp to max velocity
+    player_velocity.0 = player_velocity.0.clamp_length_max(player_max_velocity.0);
     
-    player_transform.translation += player_velocity.0.clamp_length_max(player_max_velocity.0).extend(0.0);
+    player_transform.translation += player_velocity.0.extend(0.0);
 }
