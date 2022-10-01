@@ -1,6 +1,6 @@
 use std::time::Duration;
 
-use crate::player::{combat::projectile_type::ProjectileType};
+use crate::{player::{combat::projectile_type::ProjectileType}, common::Velocity};
 use bevy::prelude::*;
 
 use super::weapon_type::WeaponType;
@@ -27,7 +27,8 @@ impl Weapon {
         delta_time: Duration,
         commands: &mut Box<Commands>,
         asset_server: &mut Box<Res<AssetServer>>,
-        player_transform: Transform
+        player_transform: Transform,
+        player_velocity: Velocity
     ) {
         self.attack_timer.tick(delta_time);
 
@@ -35,14 +36,22 @@ impl Weapon {
 
             let projectile_bundle = self.projectile_type.get_projectile_bundle(asset_server);
 
-            for (transform, speed) in self.shooting_behavior.shots.clone() {
+            for (mut projectile_offset, projectile_speed) in self.shooting_behavior.shots.clone() {
                 let mut projectile = projectile_bundle.clone();
 
                 projectile.sprite_bundle.transform = player_transform;
-                //TODO: add transform offset from shootingbehavior
 
-                projectile.velocity.0 = (player_transform.rotation * Vec3::Y).truncate();
-                projectile.velocity.0 *= speed.0;
+                // Add rotation offset
+                projectile.sprite_bundle.transform.rotation *= projectile_offset.rotation;
+
+                // Add translation offset
+                projectile_offset.rotate_around(Vec3::ZERO, player_transform.rotation);
+                projectile.sprite_bundle.transform.translation += projectile_offset.translation;
+
+                // Set velocity
+                projectile.velocity.0 = (projectile.sprite_bundle.transform.rotation * Vec3::Y).truncate();
+                projectile.velocity.0 *= projectile_speed.0;
+                projectile.velocity.0 += player_velocity.0;
 
                 commands.spawn_bundle(projectile);
             }
@@ -51,3 +60,5 @@ impl Weapon {
 
     pub fn upgrade() {}
 }
+
+

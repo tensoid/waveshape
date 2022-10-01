@@ -21,16 +21,16 @@ pub fn shoot_weapons(
     mut weapons_query: Query<&mut Weapons>,
     commands: Commands,
     asset_server: Res<AssetServer>,
-    player_query: Query<&Transform, With<Player>>
+    player_query: Query<(&Transform, &Velocity), With<Player>>
 
 ) {
     let weapons = &mut weapons_query.single_mut().0;
     let box_commands = &mut Box::new(commands);
     let box_asset_server = &mut Box::new(asset_server);
-    let player_transform = player_query.single().clone();
+    let (player_transform, player_velocity) = player_query.single();
 
     for weapon in weapons.iter_mut() {
-        weapon.try_shoot(time.delta(), box_commands, box_asset_server, player_transform);
+        weapon.try_shoot(time.delta(), box_commands, box_asset_server, player_transform.clone(), player_velocity.clone());
     }
 }
 

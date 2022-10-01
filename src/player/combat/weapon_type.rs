@@ -20,7 +20,32 @@ impl WeaponType {
                     attack_timer: Timer::from_seconds(1.0, true),
                     weapon_type: self,
                     shooting_behavior: ShootingBehavior {
-                        shots: vec![(Transform {..default()}, Speed(5.0))],
+                        shots: vec![
+                            (
+                                Transform {
+                                    rotation: Quat::from_rotation_z(0.2),
+                                    translation: Vec3::new(0.0, 25.0, 0.0),
+                                    ..default()
+                                }, 
+                                Speed(10.0)
+                            ),
+                            (
+                                Transform {
+                                    rotation: Quat::from_rotation_z(0.0),
+                                    translation: Vec3::new(0.0, 25.0, 0.0),
+                                    ..default()
+                                }, 
+                                Speed(10.0)
+                            ),
+                            (
+                                Transform {
+                                    rotation: Quat::from_rotation_z(-0.2),
+                                    translation: Vec3::new(0.0, 25.0, 0.0),
+                                    ..default()
+                                }, 
+                                Speed(10.0)
+                            )
+                        ],
                         delay_between_shots: None, //TODO: implement, maybe with custom ShotTimer?? that keeps track of shots shot etc.
                     },
                 }

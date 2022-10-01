@@ -14,7 +14,7 @@ impl ProjectileType {
     pub fn get_projectile_bundle(self, asset_server: &mut Box<Res<AssetServer>>) -> ProjectileBundle {
 
         let projectile_texture = match self {
-            ProjectileType::LASER => asset_server.load("projectile.png")
+            ProjectileType::LASER => asset_server.load("laser.png")
         };
 
         ProjectileBundle {
