@@ -1573,13 +1573,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "hellwave"
-version = "0.1.0"
-dependencies = [
- "bevy",
-]
-
-[[package]]
 name = "hermit-abi"
 version = "0.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3046,6 +3039,13 @@ name = "wasm-bindgen-shared"
 version = "0.2.83"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1c38c045535d93ec4f0b4defec448e4291638ee608530863b1e2ba115d4fff7f"
+
+[[package]]
+name = "waveshape"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+]
 
 [[package]]
 name = "web-sys"

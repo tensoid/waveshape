@@ -24,7 +24,7 @@ fn main() {
     App::new()
         .insert_resource(ClearColor(Color::rgb(0.1, 0.1, 0.1)))
         .insert_resource(WindowDescriptor {
-            title: "Hellwave".to_string(),
+            title: "Waveshape".to_string(),
             //present_mode: PresentMode::Immediate,
             ..Default::default()
         })
