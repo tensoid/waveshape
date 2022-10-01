@@ -21,4 +21,4 @@ fn spawn_player(
     .with_children(|parent| {
         parent.spawn_bundle(Class::TRIANGLE.get_booster_bundle(asset_server2));
     });
-}   
+}

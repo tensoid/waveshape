@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
 use crate::player::player_bundles::*;
+use crate::common::Velocity;
 
 const MIN_SPEED_BEFORE_STOP: f32 = 0.1;
 

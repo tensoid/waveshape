@@ -5,7 +5,7 @@ pub enum Layer {
 }
 
 impl Layer {
-    pub fn get_z(&self) -> f32 {
+    pub fn get_z(self) -> f32 {
         match self {
             Layer::GRID => 0.0,
             Layer::PLAYER => 1.0,

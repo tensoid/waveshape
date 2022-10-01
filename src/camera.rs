@@ -6,7 +6,7 @@ use crate::player::player_bundles::Player;
 const BOOSTER_ZOOM: f32 = 1.1;
 const BOOSTER_ZOOM_SMOOTH: f32 = 0.1;
 
-const CAMERA_FOLLOW_SMOOTH: f32 = 0.2;
+const CAMERA_FOLLOW_SMOOTH: f32 = 0.1;
 
 
 pub struct CameraPlugin;
@@ -37,7 +37,7 @@ fn move_camera(
 }
 
 fn camera_effects(
-    mut camera: Query<(&mut OrthographicProjection), With<Camera>>,
+    mut camera: Query<&mut OrthographicProjection, With<Camera>>,
     mouse: Res<Input<MouseButton>>,
 ) {
     let mut camera_projection = camera.single_mut();

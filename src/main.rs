@@ -7,11 +7,17 @@ mod camera;
 mod layers;
 mod input;
 mod utils;
+mod ui;
+mod common;
+
 
 use player::player::PlayerPlugin;
 use camera::CameraPlugin;
 use map::grid::GridPlugin;
 use input::InputPlugin;
+use gamedata::gamedata::initialize_game_data;
+use ui::UIPlugin;
+use player::combat::combat::CombatPlugin;
 
 fn main() {
 
@@ -29,6 +35,9 @@ fn main() {
         .add_plugin(PlayerPlugin)
         .add_plugin(CameraPlugin)
         .add_plugin(InputPlugin)
+        .add_plugin(UIPlugin)
+        .add_plugin(CombatPlugin)
+        .add_startup_system(initialize_game_data)
         .run();
 }
 

@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+use crate::{player::combat::weapon::Weapon, common::Velocity};
+
 
 #[derive(Component)]
 pub struct Player;
@@ -20,10 +22,10 @@ pub struct Acceleration(pub f32);
 pub struct Deceleration(pub f32);
 
 #[derive(Component)]
-pub struct Velocity(pub Vec2);
+pub struct MaxVelocity(pub f32);
 
 #[derive(Component)]
-pub struct MaxVelocity(pub f32);
+pub struct Weapons(pub Vec<Weapon>);
 
 
 
@@ -36,6 +38,7 @@ pub struct PlayerBundle {
     pub deceleration: Deceleration,
     pub velocity: Velocity,
     pub max_velocity: MaxVelocity,
+    pub weapons: Weapons,
 
     #[bundle]
     pub sprite_bundle: SpriteBundle

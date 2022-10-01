@@ -2,6 +2,8 @@ use bevy::prelude::*;
 
 use crate::layers::Layer;
 use crate::player::player_bundles::*;
+use crate::player::combat::weapon_type::WeaponType;
+use crate::common::Velocity;
 
 pub enum Class {
     TRIANGLE,
@@ -24,6 +26,7 @@ impl Class {
                     deceleration: Deceleration(0.97),
                     velocity: Velocity(Vec2::new(0.0, 0.0)),
                     max_velocity: MaxVelocity(8.0),
+                    weapons: Weapons(vec![WeaponType::LASER.get_weapon()]),
                     sprite_bundle: SpriteBundle {
                         texture: player_texture,
                         transform: Transform {
